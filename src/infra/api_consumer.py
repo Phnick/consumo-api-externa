@@ -46,17 +46,14 @@ class ApiConsumer(ApiConsumerInterface):
                 message=response.json()["message"], status_code=status_code
             )
 
-    def get_starships_by_id(self, starship_id: int, limit: int, page: int):
+    def get_starships_by_id(self, starship_id: int):
 
         url = f'https://www.swapi.tech/api/starships/{starship_id}'
-        params = {
-            "page": page,
-            "limit": limit
-        }
+
         req = requests.Request(
             method='GET',
             url=url,
-            params=params
+
         )
         req_preper = req.prepare()
         print(f"URL gerada: {req_preper.url}")

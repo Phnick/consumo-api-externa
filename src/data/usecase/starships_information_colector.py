@@ -12,9 +12,9 @@ class StarshipInformationColector(StarshipInformationColectorInterface):
         self.__api_consumer = api_consumer
 
     # return dict
-    def find_starship(self, starship_id: int, page: int, limit: int):
+    def find_starship(self, starship_id: int):
         starship_information = self.__search_starships(
-            starship_id, page, limit)
+            starship_id)
 
         print(starship_information)
         starship_formated_list = self.__format_api_response_starship(
@@ -22,21 +22,17 @@ class StarshipInformationColector(StarshipInformationColectorInterface):
         )
         return starship_formated_list
 
-    def __search_starships(self, starship_id: int, page: int, limit: int):
-        self.__validate_params(starship_id, page, limit)
+    def __search_starships(self, starship_id: int):
+        self.__validate_params(starship_id)
         api_response = self.__api_consumer.get_starships_by_id(
-            starship_id, page, limit)
+            starship_id)
         return api_response
 
-    def __validate_params(self, starship_id: int, page: int, limit: int):
+    def __validate_params(self, starship_id: int):
         if not starship_id:
             raise HttpNotFoundError('Id inválido')
-        if starship_id < 2 or starship_id > 75:
-            raise HttpUnprocessableEntityError('id deve ser entre 2 a 75')
-        if page > 35:
-            raise HttpUnprocessableEntityError('Page deve ser de 1 a 35')
-        if limit > 10:
-            raise HttpUnprocessableEntityError('limit deve ser de 1 a 10')
+        if starship_id < 2 or starship_id > 17:
+            raise HttpUnprocessableEntityError('id deve ser entre 2 a 17')
 
     @classmethod
     def __format_api_response_starship(cls, starships_information: Dict):

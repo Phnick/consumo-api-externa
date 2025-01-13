@@ -10,12 +10,9 @@ class StarshipInformationColectorController(ControllersInterface):
         self.__use_case = starshipe_information_colector
 
     def handler(self, http_request: Dict):
-        page = http_request["query_params"]["page"]
-        limit = http_request["query_params"]["limit"]
         starship_id = http_request["body"]["starship_id"]
-
         starship_information = self.__use_case.find_starship(
-            int(starship_id), int(page), int(limit))
+            int(starship_id))
         http_response = {"status_code": 200,
                          "data": {"data": starship_information}}
         return http_response

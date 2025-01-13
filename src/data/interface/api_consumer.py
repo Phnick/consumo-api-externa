@@ -8,5 +8,5 @@ class ApiConsumerInterface(ABC):
         pass
 
     @abstractmethod
-    def get_starships_by_id(self, starship_id: int, limit: int, page: int):
+    def get_starships_by_id(self, starship_id: int):
         pass
